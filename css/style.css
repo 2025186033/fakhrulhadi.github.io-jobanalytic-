@@ -1,0 +1,184 @@
+/* =========================================================
+   JOB ANALYTICS - Modern Purple theme (Dark + Light)
+   Uses Bootstrap 5.3 colour modes: <html data-bs-theme="dark|light">
+   Nota: nama kelas lama `.btn-neon` / `.text-neon` dikekalkan supaya
+   HTML & JS sedia ada serasi; kini bermaksud butang/teks aksen ungu.
+   Sections: 1 Variables | 2 Base | 3 Header & Offcanvas | 4 Cards | 5 Buttons
+             6 Forms | 7 Tables & badges | 8 Modals | 9 Companies
+             10 Dashboard & profile | 11 Footer | 12 Auth page | 13 Responsive
+   ========================================================= */
+
+/* 1. VARIABLES ------------------------------------------- */
+:root, [data-bs-theme="dark"] {
+  --bg-color: #0f0d17;
+  --card-bg: #171426;
+  --nav-bg: #130f20;
+  --input-bg: #0f0d17;
+  --surface-2: #1d1a2e;
+  --border-color: #2a2640;
+  --text-primary: #f1eefc;
+  --text-secondary: #a09cb8;
+  --accent: #a78bfa;               /* teks / pautan / sempadan aktif */
+  --accent-strong: #7c3aed;        /* latar butang utama */
+  --accent-strong-hover: #6d28d9;
+  --accent-soft: rgba(167, 139, 250, 0.14);
+  --accent-border: rgba(167, 139, 250, 0.35);
+  --danger-color: #f87171;
+  --warning-color: #fbbf24;
+  --info-color: #60a5fa;
+  --success-color: #34d399;
+  --btn-secondary-bg: #26223a;
+  --btn-secondary-border: #38334f;
+  --btn-secondary-hover: #332e4d;
+  --row-hover: rgba(167, 139, 250, 0.06);
+  --shadow-soft: 0 1px 3px rgba(0, 0, 0, .3), 0 4px 14px rgba(0, 0, 0, .2);
+}
+[data-bs-theme="light"] {
+  --bg-color: #f5f3ff;
+  --card-bg: #ffffff;
+  --nav-bg: #ffffff;
+  --input-bg: #ffffff;
+  --surface-2: #f3f0ff;
+  --border-color: #e4def5;
+  --text-primary: #1e1b2e;
+  --text-secondary: #5b5675;
+  --accent: #6d28d9;
+  --accent-strong: #7c3aed;
+  --accent-strong-hover: #6d28d9;
+  --accent-soft: rgba(124, 58, 237, 0.08);
+  --accent-border: rgba(124, 58, 237, 0.3);
+  --danger-color: #dc2626;
+  --warning-color: #b45309;
+  --info-color: #2563eb;
+  --success-color: #059669;
+  --btn-secondary-bg: #ede9fe;
+  --btn-secondary-border: #ddd6fe;
+  --btn-secondary-hover: #ddd6fe;
+  --row-hover: rgba(124, 58, 237, 0.05);
+  --shadow-soft: 0 1px 2px rgba(76, 29, 149, .06), 0 4px 14px rgba(76, 29, 149, .08);
+}
+/* Re-map Bootstrap variables to the theme (same specificity as Bootstrap, loaded later) */
+:root, [data-bs-theme="dark"], [data-bs-theme="light"] {
+  --bs-body-bg: var(--bg-color);
+  --bs-body-color: var(--text-primary);
+  --bs-border-color: var(--border-color);
+  --bs-secondary-color: var(--text-secondary);
+  --bs-link-color: var(--accent);
+  --bs-link-hover-color: var(--accent);
+  --bs-font-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* 2. BASE ------------------------------------------------ */
+body { background-color: var(--bg-color); color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column; font-family: var(--bs-font-sans-serif); transition: background-color .25s ease, color .25s ease; }
+main { flex: 1; }
+.text-secondary, .text-muted { color: var(--text-secondary) !important; }
+.text-neon { color: var(--accent) !important; }
+.hidden { display: none !important; }
+.min-w-0 { min-width: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#bgCanvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+/* 3. HEADER & OFFCANVAS MENU (kiri) ---------------------- */
+.navbar-neon { background-color: var(--nav-bg); border-bottom: 1px solid var(--border-color); box-shadow: var(--shadow-soft); }
+.navbar-brand { font-weight: 700; letter-spacing: 1px; color: var(--text-primary) !important; }
+.navbar-brand span { color: var(--accent); }
+.navbar-brand .brand-logo { height: 36px; width: auto; margin-right: 8px; vertical-align: middle; }
+.navbar-neon .btn { width: 42px; height: 38px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+.theme-fixed { position: fixed; top: 14px; right: 14px; z-index: 1030; }
+.theme-fixed .btn { width: 42px; height: 38px; padding: 0; }
+
+.offcanvas { --bs-offcanvas-width: 300px; --bs-offcanvas-bg: var(--card-bg); --bs-offcanvas-color: var(--text-primary);
+  --bs-offcanvas-border-color: var(--border-color); box-shadow: var(--shadow-soft); }
+.offcanvas .nav-link { color: var(--text-secondary); font-weight: 500; border-radius: 8px; padding: 10px 14px; transition: all .25s ease; }
+.offcanvas .nav-link:hover, .offcanvas .nav-link.active { color: var(--accent); background-color: var(--accent-soft); }
+.user-badge { border: 1px solid var(--accent-border); padding: 4px 16px 4px 4px; border-radius: 30px; font-size: .9rem; display: inline-flex; align-items: center; gap: 10px; max-width: 100%; }
+.user-badge .js-user-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.menu-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-border); background: var(--surface-2); flex-shrink: 0; }
+
+/* 4. CARDS ----------------------------------------------- */
+.card { --bs-card-bg: var(--card-bg); --bs-card-color: var(--text-primary); --bs-card-cap-bg: transparent;
+  background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px;
+  box-shadow: var(--shadow-soft); transition: border-color .2s ease, box-shadow .2s ease; }
+.card:hover { border-color: var(--accent-border); }
+.stat-card h2 { font-size: .85rem; color: var(--text-secondary); margin-bottom: 6px; }
+.stat-card .number { font-size: 1.9rem; font-weight: 700; margin: 0; }
+.page-title { font-size: 1.5rem; font-weight: 700; }
+
+/* 5. BUTTONS --------------------------------------------- */
+.btn-neon { background: var(--accent-strong); color: #fff; border: 1px solid var(--accent-strong); font-weight: 600; border-radius: 8px;
+  box-shadow: var(--shadow-soft); transition: all .25s ease; }
+.btn-neon:hover, .btn-neon:focus, .btn-neon:active { background: var(--accent-strong-hover); border-color: var(--accent-strong-hover); color: #fff; }
+.btn-secondary-dark { background: var(--btn-secondary-bg); color: var(--text-primary); border: 1px solid var(--btn-secondary-border); border-radius: 8px; }
+.btn-secondary-dark:hover, .btn-secondary-dark:focus { background: var(--btn-secondary-hover); color: var(--text-primary); border-color: var(--btn-secondary-border); }
+.btn-outline-danger { --bs-btn-color: var(--danger-color); --bs-btn-border-color: var(--danger-color); --bs-btn-hover-bg: var(--danger-color); --bs-btn-hover-border-color: var(--danger-color); --bs-btn-hover-color: #fff; --bs-btn-active-bg: var(--danger-color); --bs-btn-active-border-color: var(--danger-color); }
+.btn-outline-info { --bs-btn-color: var(--accent); --bs-btn-border-color: var(--accent-border); --bs-btn-hover-bg: var(--accent-strong); --bs-btn-hover-border-color: var(--accent-strong); --bs-btn-hover-color: #fff; --bs-btn-active-bg: var(--accent-strong); --bs-btn-active-border-color: var(--accent-strong); }
+
+/* 6. FORMS ----------------------------------------------- */
+.form-label { font-size: .85rem; color: var(--text-secondary); }
+.form-control, .form-select { background-color: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; }
+.form-control::placeholder { color: var(--text-secondary); opacity: .6; }
+.form-control:focus, .form-select:focus { background-color: var(--input-bg); color: var(--text-primary); border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.form-control:disabled { background-color: var(--surface-2); color: var(--text-secondary); }
+.form-check-input { background-color: var(--input-bg); border-color: var(--btn-secondary-border); }
+.form-check-input:checked { background-color: var(--accent-strong); border-color: var(--accent-strong); }
+.alert-danger { background: rgba(239,68,68,.12); border-color: var(--danger-color); color: var(--danger-color); }
+.alert-success { background: rgba(16,185,129,.12); border-color: var(--success-color); color: var(--success-color); }
+.alert-info { background: var(--accent-soft); border-color: var(--accent-border); color: var(--accent); }
+
+/* 7. TABLES & STATUS BADGES ------------------------------ */
+.table { --bs-table-bg: transparent; --bs-table-color: var(--text-primary); --bs-table-border-color: var(--border-color);
+  --bs-table-hover-bg: var(--row-hover); --bs-table-hover-color: var(--text-primary); margin-bottom: 0; }
+.table thead th { color: var(--text-secondary); font-weight: 600; white-space: nowrap; user-select: none; background: transparent; }
+.table thead th.sortable { cursor: pointer; }
+.table thead th.sortable:hover, .table thead th.sorted { color: var(--accent); }
+.table td, .table th { padding: 12px 14px; vertical-align: middle; font-size: .9rem; }
+.status-tag { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: .75rem; font-weight: 600; text-transform: uppercase; }
+.status-tag.pending  { border: 1px solid var(--warning-color); color: var(--warning-color); background: rgba(245,158,11,.1); }
+.status-tag.reviewed { border: 1px solid var(--info-color); color: var(--info-color); background: rgba(59,130,246,.1); }
+.status-tag.accepted { border: 1px solid var(--success-color); color: var(--success-color); background: rgba(16,185,129,.1); }
+.status-tag.rejected { border: 1px solid var(--danger-color); color: var(--danger-color); background: rgba(239,68,68,.1); }
+
+/* 8. MODALS ---------------------------------------------- */
+.modal-content { background-color: var(--card-bg); color: var(--text-primary); border: 1px solid var(--accent-border); box-shadow: var(--shadow-soft); border-radius: 12px; }
+.modal-header, .modal-footer { border-color: var(--border-color); }
+.modal-backdrop { --bs-backdrop-opacity: .65; }
+
+/* 9. COMPANIES ------------------------------------------- */
+.company-card .card-body { display: flex; flex-direction: column; }
+.company-logo { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; background: var(--surface-2); border: 1px solid var(--border-color); overflow: hidden; flex-shrink: 0; }
+.company-logo img { width: 100%; height: 100%; object-fit: cover; }
+.company-desc { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.rating-badge { color: var(--warning-color); font-weight: 600; font-size: .9rem; white-space: nowrap; }
+.vacancy-badge { display: inline-flex; align-items: center; gap: 6px; font-size: .75rem; font-weight: 600; border-radius: 20px; padding: 3px 10px; white-space: nowrap; }
+.vacancy-badge.open { color: var(--success-color); background: rgba(16,185,129,.12); border: 1px solid var(--success-color); }
+.vacancy-badge.full { color: var(--danger-color); background: rgba(239,68,68,.1); border: 1px solid var(--danger-color); }
+.logo-preview { width: 72px; height: 72px; border-radius: 12px; object-fit: cover; border: 1px dashed var(--accent-border); background: var(--surface-2); }
+
+/* 10. DASHBOARD & PROFILE -------------------------------- */
+.chart-box { position: relative; height: 300px; }
+.profile-img-preview { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; box-shadow: var(--shadow-soft); background: var(--surface-2); }
+#profileSection { scroll-margin-top: 80px; }
+
+/* 11. FOOTER --------------------------------------------- */
+.site-footer { border-top: 1px solid var(--border-color); background-color: var(--nav-bg); color: var(--text-secondary); font-size: .85rem; }
+.site-footer h4 { font-size: .95rem; color: var(--text-primary); margin-bottom: 10px; }
+.site-footer .footer-strong { color: var(--text-primary); }
+.site-footer a { color: var(--text-secondary); text-decoration: none; }
+.site-footer a:hover { color: var(--accent); text-decoration: underline; }
+.site-footer .footer-bottom { border-top: 1px solid var(--border-color); }
+
+/* 12. AUTH PAGE ------------------------------------------ */
+.auth-wrapper { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.auth-card { width: 100%; max-width: 440px; }
+.auth-card .brand { text-align: center; font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 18px; }
+.auth-card .brand span { color: var(--accent); }
+.auth-logo { height: 80px; width: auto; }
+
+/* 13. RESPONSIVE ----------------------------------------- */
+@media (max-width: 575.98px) {
+  .page-title { font-size: 1.25rem; }
+  .chart-box { height: 260px; }
+  .offcanvas { --bs-offcanvas-width: 85vw; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
