@@ -184,8 +184,16 @@ const PROFILE_FIELDS = {
 function getSavedProfile() {
   const session = getSession() || {};
   const saved = LS.get("profile_" + profileKey(), {});
-  return { fullName: session.fullName || "", email: session.email || "", phone: session.phone || "",
-           address: "", education: "", skills: "", about: "", ...saved };
+  return {
+    fullName: session.fullName || "MUHAMMAD FAKHRUL HADI BIN ZAMRI",
+    email: session.email || "2025186033@student.uitm.edu.my",
+    phone: session.phone || "+60 18-237 5359",
+    address: "Shah Alam, Selangor",
+    education: "Bachelor of Information Science (Hons.) Information Systems Management, UiTM",
+    skills: "HTML:90, CSS:85, JavaScript:80, Bootstrap 5:90, Data Analysis:85",
+    about: "Final year Information Systems Management student at UiTM passionate about web development and data analytics.",
+    ...saved
+  };
 }
 
 /* ---------- Graph 2: Skill Mastery (polar area / horizontal bar) ---------- */
